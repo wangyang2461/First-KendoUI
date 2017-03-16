@@ -1,0 +1,39 @@
+<h1>
+  {{title}}
+</h1>
+
+<button kendoButton (click)="onClick()" [primary]="true">My Kendo UI BUtton</button>
+
+<kendo-grid [data]="gridData" [height]=360>
+  <kendo-grid-column field="ProductID" title="ID" width="40"></kendo-grid-column>
+  <kendo-grid-column field="ProductName" title="Name" width="250"></kendo-grid-column>
+  <kendo-grid-column field="Category.CategoryName" title="Category"></kendo-grid-column>
+  <kendo-grid-column field="UnitPrice" title="UnitPrice" width="80"></kendo-grid-column>
+  <kendo-grid-column field="UnitsInStock" title="In Stock" width="80"></kendo-grid-column>
+  <kendo-grid-column field="Discontinued" title="Discontinued" width="120">
+    <template kendoGridCellTemplate let-dataItem>
+      <input type="checkbox" [checked]="dataItem.Discontinued " disabled/>
+    </template>
+  </kendo-grid-column>
+</kendo-grid>
+
+<div class="example-wrapper">
+  <button kendoButton *ngIf="!opened" (click)="open()">Open</button>
+  <kendo-dialog title="Please confirm" *ngIf="opened" (close)="close('cancle')">
+    <p style="margin:30px;text-align: center;">Are you sure want to continue ?</p>
+    <kendo-dialog-actions>
+      <button kendoButton (click)="close('no')">No</button>
+      <button kendoButton (click)="close('yes')">Yes</button>
+    </kendo-dialog-actions>
+  </kendo-dialog>
+</div>
+
+<div class="example-config">
+  <button #anchor (click)="onTogle()" class="k-button">{{ toggleText }} Popup</button>
+</div>
+<div class="example-wrapper">
+  <kendo-popup [popupClass]="'content popup'" [anchor]="anchor" (anchorViewportLeave)="show = false" *ngIf="show">
+    <!-- User-defined content -->
+    Popup content.
+  </kendo-popup>
+</div>
