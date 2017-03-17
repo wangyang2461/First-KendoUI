@@ -7,7 +7,7 @@ import { products } from './../product/product';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'app works Test!';
   gridData: any[] = products;
   opened: boolean = false;
   toggleText: string = "Hide";
