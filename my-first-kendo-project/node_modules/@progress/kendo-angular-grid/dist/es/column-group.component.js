@@ -1,0 +1,97 @@
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+import { Component, forwardRef, SkipSelf, Host, Optional } from '@angular/core';
+import { ColumnBase } from './column-base';
+/**
+ * @hidden
+ */
+export function isColumnGroupComponent(column) {
+    return column.isColumnGroup;
+}
+/**
+ * Represents the column-group header of the Kendo UI Grid component for Angular.
+ *
+ * @example
+ * ```ts-preview
+ *
+ * @@Component({
+ *    selector: 'my-app',
+ *    template: `
+ *     <kendo-grid [data]="gridData">
+ *       <kendo-grid-column-group title="Product Info">
+ *         <template kendoGridHeaderTemplate let-columnIndex="columnIndex" let-column="column">
+ *               Column index: {{columnIndex}} / column title: {{column.title}}
+ *         </template>
+ *         <kendo-grid-column field="ProductID" title="Product ID" width="120">
+ *         </kendo-grid-column>
+ *         <kendo-grid-column field="ProductName" title="Product Name">
+ *         </kendo-grid-column>
+ *       </kendo-grid-column-group>
+ *       <kendo-grid-column field="UnitPrice" title="Unit Price" width="230">
+ *       </kendo-grid-column>
+ *       <kendo-grid-column field="Discontinued" width="120">
+ *           <template kendoGridCellTemplate let-dataItem>
+ *               <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+ *           </template>
+ *       </kendo-grid-column>
+ *     </kendo-grid>
+ *    `
+ * })
+ *
+ * class AppComponent {
+ *    private gridData: any[];
+ *
+ *    constructor() {
+ *        this.gridData = products;
+ *    }
+ * }
+ *
+ * const products = [{
+ *    "ProductID": 1,
+ *    "ProductName": "Chai",
+ *    "UnitPrice": 18.0000,
+ *    "Discontinued": true
+ *  }, {
+ *    "ProductID": 2,
+ *    "ProductName": "Chang",
+ *    "UnitPrice": 19.0000,
+ *    "Discontinued": false
+ *  }
+ * ];
+ *
+ * ```
+ */
+export var ColumnGroupComponent = (function (_super) {
+    __extends(ColumnGroupComponent, _super);
+    function ColumnGroupComponent(parent) {
+        _super.call(this, parent);
+        this.parent = parent;
+        this.isColumnGroup = true;
+    }
+    /**
+     * @hidden
+     */
+    ColumnGroupComponent.prototype.rowspan = function () {
+        return 1;
+    };
+    ColumnGroupComponent.decorators = [
+        { type: Component, args: [{
+                    providers: [
+                        {
+                            provide: ColumnBase,
+                            useExisting: forwardRef(function () { return ColumnGroupComponent; }) // tslint:disable-line:no-forward-ref
+                        }
+                    ],
+                    selector: 'kendo-grid-column-group',
+                    template: ""
+                },] },
+    ];
+    /** @nocollapse */
+    ColumnGroupComponent.ctorParameters = function () { return [
+        { type: ColumnBase, decorators: [{ type: SkipSelf }, { type: Host }, { type: Optional },] },
+    ]; };
+    return ColumnGroupComponent;
+}(ColumnBase));

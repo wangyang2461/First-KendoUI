@@ -1,0 +1,72 @@
+@include exports("multiselect/layout") {
+
+    // Base
+    .k-multiselect {
+        @include border-radius( $border-radius );
+        border-width: 1px;
+        border-style: solid;
+        width: 100%;
+
+        // Compact
+        @include compact {
+            padding: ($input-padding-y / 4);
+        }
+
+        .k-loading-hidden {
+            visibility: hidden;
+        }
+    }
+
+
+    .k-multiselect-wrap {
+        min-height: calc( #{$input-inner-calc-size} );
+        border-width: 0;
+        padding-right: ($padding-x * 3);
+        cursor: text;
+
+        // Token list
+        ul {
+            vertical-align: top;
+        }
+        li.k-button {
+            float: left;
+        }
+
+
+        // Token
+        .k-button {
+            padding: ($button-padding-y / 2) ($button-padding-x / 2);
+            margin: $padding-y-sm 0 0 $padding-y-sm;
+            cursor: default;
+            display: inline-flex;
+            flex-direction: row;
+            align-items: center;
+            line-height: inherit;
+            white-space: normal;
+
+            .k-select {
+                display: flex;
+                cursor: pointer;
+                margin-left: $padding-x;
+            }
+
+            &:last-child {
+                margin-bottom: $padding-y-sm;
+            }
+        }
+
+        .k-searchbar {
+            // search bar must be floated to align after any selected tags
+            // (or align below them, if space is not available)
+            float: left;
+            width: auto;
+        }
+
+        // Icons
+        .k-i-loading {
+            position: absolute;
+            right: $padding-x;
+            top: $padding-y-lg;
+        }
+    }
+}
